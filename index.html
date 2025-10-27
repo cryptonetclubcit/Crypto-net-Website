@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto-Net | IoT & Cybersecurity Club</title>
+    <meta name="description" content="Crypto-Net - CSE IoT and Cybersecurity Department Club. Securing Tomorrow's Connected World.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <button id="themeToggle" class="theme-btn">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h1>Crypto-Net</h1>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p>Initializing Security Protocols...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">
+                    <div class="logo-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <span>Crypto-Net</span>
+                </a>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#events" class="nav-link">Events</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#achievements" class="nav-link">Achievements</a>
+                <a href="#contact" class="nav-link">Join Us</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Homepage -->
+    <section id="home" class="hero-section">
+        <div class="matrix-bg" id="matrixBg"></div>
+        <div class="hero-content">
+            <div class="hero-logo glitch" data-text="Crypto-Net">
+                <h1>Crypto-Net</h1>
+            </div>
+            <p class="hero-tagline">Securing Tomorrow's Connected World</p>
+            <div class="typing-container">
+                <span id="typingText" class="typing-text"></span>
+                <span class="typing-cursor">|</span>
+            </div>
+            <div class="hero-buttons">
+                <a href="#contact" class="cta-button">
+                    <i class="fas fa-lock"></i>
+                    <span>Join Crypto-Net</span>
+                </a>
+                <a href="#about" class="cta-button secondary">
+                    <span>Learn More</span>
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section class="events-preview">
+        <div class="container">
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="events-slider">
+                <div class="slider-container" id="eventsSlider">
+                    <div class="event-card">
+                        <div class="event-date">
+                            <span class="date-day">15</span>
+                            <span class="date-month">OCT</span>
+                        </div>
+                        <div class="event-content">
+                            <h3>Cybersecurity Workshop</h3>
+                            <p>Introduction to ethical hacking and penetration testing techniques.</p>
+                            <div class="event-tags">
+                                <span class="tag">Workshop</span>
+                                <span class="tag">Beginner</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-date">
+                            <span class="date-day">22</span>
+                            <span class="date-month">OCT</span>
+                        </div>
+                        <div class="event-content">
+                            <h3>IoT Security Challenge</h3>
+                            <p>Hands-on session on securing IoT devices and networks.</p>
+                            <div class="event-tags">
+                                <span class="tag">Challenge</span>
+                                <span class="tag">IoT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-date">
+                            <span class="date-day">05</span>
+                            <span class="date-month">NOV</span>
+                        </div>
+                        <div class="event-content">
+                            <h3>CTF Competition</h3>
+                            <p>Capture The Flag competition for all skill levels.</p>
+                            <div class="event-tags">
+                                <span class="tag">Competition</span>
+                                <span class="tag">All Levels</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="slider-btn prev" id="prevEvent">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-btn next" id="nextEvent">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Crypto-Net</h2>
+            <div class="about-content">
+                <div class="mission-vision">
+                    <div class="mission">
+                        <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                        <p>To foster cybersecurity education and IoT security research among CSE students, creating a community of ethical hackers and security specialists.</p>
+                    </div>
+                    <div class="vision">
+                        <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                        <p>To become a premier cybersecurity club that produces industry-ready professionals capable of securing tomorrow's connected world.</p>
+                    </div>
+                </div>
+                
+                <div class="core-team">
+                    <h3 class="team-title">Core Team</h3>
+                    <div class="team-grid">
+                        <div class="team-card">
+                            <div class="member-photo">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="member-info">
+                                <h4>Alex Johnson</h4>
+                                <span class="member-role president">President</span>
+                                <p>Cybersecurity enthusiast with expertise in network security.</p>
+                            </div>
+                        </div>
+                        <div class="team-card">
+                            <div class="member-photo">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="member-info">
+                                <h4>Sarah Chen</h4>
+                                <span class="member-role tech-lead">Technical Lead</span>
+                                <p>IoT security specialist and cryptography researcher.</p>
+                            </div>
+                        </div>
+                        <div class="team-card">
+                            <div class="member-photo">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="member-info">
+                                <h4>Dr. Michael Rodriguez</h4>
+                                <span class="member-role faculty">Faculty Coordinator</span>
+                                <p>Professor with 15+ years in cybersecurity and IoT research.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-section">
+                    <h3 class="timeline-title">Club Journey</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">September 2023</div>
+                                <h4>Club Foundation</h4>
+                                <p>Crypto-Net officially established in the CSE Department with 25 founding members.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">October 2023</div>
+                                <h4>First Workshop</h4>
+                                <p>Successfully conducted our first ethical hacking workshop with 50+ participants.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">November 2023</div>
+                                <h4>Industry Partnership</h4>
+                                <p>Established collaboration with leading cybersecurity companies for guest lectures.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2024</div>
+                                <h4>Future Goals</h4>
+                                <p>Plan to participate in national cybersecurity competitions and expand to 100+ active members.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events & Activities Section -->
+    <section id="events" class="events-section">
+        <div class="container">
+            <h2 class="section-title">Events & Activities</h2>
+            <div class="events-content">
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Events Coming Soon</h3>
+                    <p>We're currently planning exciting cybersecurity workshops, CTF competitions, and IoT security challenges. Stay tuned for our upcoming events calendar!</p>
+                    <div class="event-categories-preview">
+                        <div class="category-preview">
+                            <i class="fas fa-laptop-code"></i>
+                            <h4>Workshops</h4>
+                            <p>Hands-on technical sessions</p>
+                        </div>
+                        <div class="category-preview">
+                            <i class="fas fa-flag"></i>
+                            <h4>CTF Competitions</h4>
+                            <p>Capture The Flag challenges</p>
+                        </div>
+                        <div class="category-preview">
+                            <i class="fas fa-network-wired"></i>
+                            <h4>IoT Security</h4>
+                            <p>Device and network security</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Showcase Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title">Projects Showcase</h2>
+            <div class="projects-content">
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3>Projects Coming Soon</h3>
+                    <p>Our members are currently working on exciting cybersecurity and IoT projects. Check back later to see our innovative solutions!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitions & Achievements Section -->
+    <section id="achievements" class="achievements-section">
+        <div class="container">
+            <h2 class="section-title">Competitions & Achievements</h2>
+            <div class="achievements-content">
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Achievements Coming Soon</h3>
+                    <p>As a newly formed club, we're preparing to participate in cybersecurity competitions. Our achievements will be displayed here soon!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership & Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Join Crypto-Net</h2>
+            <div class="contact-content">
+                <div class="membership-info">
+                    <h3>Why Join Crypto-Net?</h3>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Hands-on Security Training</h4>
+                            <p>Learn ethical hacking, penetration testing, and IoT security through practical workshops.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-network-wired"></i>
+                            <h4>Networking Opportunities</h4>
+                            <p>Connect with industry professionals and like-minded cybersecurity enthusiasts.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-trophy"></i>
+                            <h4>Competition Experience</h4>
+                            <p>Participate in CTF competitions and cybersecurity challenges.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-book"></i>
+                            <h4>Exclusive Resources</h4>
+                            <p>Access to cybersecurity tools, research papers, and learning materials.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="membership-form-container">
+                    <h3>Become a Member</h3>
+                    <form class="membership-form" id="membershipForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="studentId">Student ID</label>
+                            <input type="text" id="studentId" name="studentId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="interest">Primary Interest</label>
+                            <select id="interest" name="interest" required>
+                                <option value="">Select your interest</option>
+                                <option value="cybersecurity">Cybersecurity</option>
+                                <option value="iot">IoT Security</option>
+                                <option value="cryptography">Cryptography</option>
+                                <option value="ethical-hacking">Ethical Hacking</option>
+                                <option value="network-security">Network Security</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Experience Level</label>
+                            <select id="experience" name="experience" required>
+                                <option value="">Select your experience</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-user-plus"></i>
+                            Join Crypto-Net
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-details">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>crypto-net@university.edu</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Computer Science Engineering Department</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Meetings: Every Wednesday, 4 PM</span>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <span>Crypto-Net</span>
+                </div>
+                <p class="footer-tagline">Securing Tomorrow's Connected World</p>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#events">Events</a>
+                    <a href="#contact">Join Us</a>
+                </div>
+                <p class="footer-copy">&copy; 2023 Crypto-Net Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
