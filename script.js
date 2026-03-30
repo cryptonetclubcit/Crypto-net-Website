@@ -254,14 +254,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const target = parseInt(el.dataset.target, 10);
         const start = performance.now();
 
-        (function frame(now) {
-            const t = Math.min((now - start) / 2000, 1);
-            const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-            el.textContent = Math.floor(ease * target);
+        function frame(now) {
+            const progress = Math.min((now - start) / 2700, 1);
+            const value = Math.floor(progress * target);
+            el.textContent = value;
 
-            if (t < 1) requestAnimationFrame(frame);
-            else el.textContent = target;
-        })(start);
+            if (progress < 1) {
+                requestAnimationFrame(frame);
+            } else {
+                el.textContent = target;
+            }
+        }
+
+        requestAnimationFrame(frame);
     }
 
     (function initThreat() {
@@ -531,4 +536,6 @@ document.addEventListener("DOMContentLoaded", () => {
             { passive: true }
         );
     }
+
+    document.querySelectorAll(".stat-num").forEach(animateCounter);
 });
