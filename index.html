@@ -1,497 +1,823 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crypto-Net | IoT & Cybersecurity Club</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypto-Net | IoT & Cybersecurity Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-outer" id="cursorOuter"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
 
-<!-- CUSTOM CURSOR -->
-<div class="cursor-outer" id="cursorOuter"></div>
-<div class="cursor-dot" id="cursorDot"></div>
+    <!-- SCAN LINE OVERLAY -->
+    <div class="scanlines"></div>
 
-<!-- SCAN LINE OVERLAY -->
-<div class="scanlines"></div>
-
-<!-- LOADING SCREEN -->
-<div id="loader" class="loader">
-  <div class="loader-inner">
-    <div class="loader-hex">
-      <svg viewBox="0 0 100 100"><polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5"/></svg>
-      <i class="fas fa-shield-halved"></i>
-    </div>
-    <div class="loader-text">
-      <span class="loader-title">CRYPTO-NET</span>
-      <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
-      <span class="loader-status" id="loaderStatus">Initializing...</span>
-    </div>
-  </div>
-</div>
-
-<!-- NAVBAR -->
-<nav class="navbar" id="navbar">
-  <div class="nav-inner">
-    <a href="#home" class="nav-logo">
-      <div class="logo-hex"><i class="fas fa-shield-halved"></i></div>
-      <span>CRYPTO<span class="accent">-NET</span></span>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#home" class="nl" data-text="HOME">HOME</a></li>
-      <li><a href="#about" class="nl" data-text="ABOUT">ABOUT</a></li>
-      <li><a href="#events" class="nl" data-text="EVENTS">EVENTS</a></li>
-      <li><a href="#projects" class="nl" data-text="PROJECTS">PROJECTS</a></li>
-      <li><a href="#achievements" class="nl" data-text="WINS">WINS</a></li>
-      <li><a href="#contact" class="nl join-btn" data-text="JOIN">JOIN</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section id="home" class="hero">
-  <canvas id="networkCanvas"></canvas>
-  <div class="hero-grid-overlay"></div>
-
-  <div class="hero-content">
-    <div class="hero-badge"><span class="badge-dot"></span>INAUGURATION — MARCH 31, 2026</div>
-    <h1 class="hero-title">
-      <span class="title-line glitch-wrap">
-        <span class="glitch" data-text="CRYPTO">CRYPTO</span>
-      </span>
-      <span class="title-line glitch-wrap">
-        <span class="glitch accent-text" data-text="NET">NET</span>
-      </span>
-    </h1>
-    <p class="hero-sub">CSE IoT &amp; Cybersecurity Department Club</p>
-    <div class="typing-wrap">
-      <span class="prompt">$&gt;&nbsp;</span>
-      <span id="typeTarget"></span>
-      <span class="caret">█</span>
-    </div>
-    <div class="hero-ctas">
-      <a href="#contact" class="btn-primary"><i class="fas fa-user-plus"></i>&nbsp;Join the Club</a>
-      <a href="#about" class="btn-ghost">Explore &nbsp;<i class="fas fa-arrow-right"></i></a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat"><span class="stat-num" data-target="25">0</span><span class="stat-lbl">Founders</span></div>
-      <div class="stat-div"></div>
-      <div class="stat"><span class="stat-num" data-target="3">0</span><span class="stat-lbl">Domains</span></div>
-      <div class="stat-div"></div>
-      <div class="stat"><span class="stat-num" data-target="2026">0</span><span class="stat-lbl">Est. Year</span></div>
-    </div>
-  </div>
-
-  <div class="scroll-hint"><span></span></div>
-</section>
-
-<!-- INAUGURATION COUNTDOWN -->
-<section class="countdown-section">
-  <div class="count-inner">
-    <div class="count-label"><span class="pulse-dot"></span> INAUGURATION COUNTDOWN</div>
-    <div class="countdown" id="countdown">
-      <div class="time-block"><span id="cd-h">00</span><small>HRS</small></div>
-      <div class="time-sep">:</div>
-      <div class="time-block"><span id="cd-m">00</span><small>MIN</small></div>
-      <div class="time-sep">:</div>
-      <div class="time-block"><span id="cd-s">00</span><small>SEC</small></div>
-    </div>
-    <p class="count-sub">March 31, 2026 — CSE Department Auditorium</p>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="section about-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="sh-tag">// WHO WE ARE</span>
-      <h2 class="sh-title">About <span class="accent">Crypto-Net</span></h2>
-    </div>
-
-    <div class="about-grid">
-      <div class="about-visual">
-        <div class="shield-anim">
-          <div class="shield-ring r1"></div>
-          <div class="shield-ring r2"></div>
-          <div class="shield-ring r3"></div>
-          <div class="shield-core"><i class="fas fa-shield-halved"></i></div>
-          <div class="orbit-dot od1"><i class="fas fa-wifi"></i></div>
-          <div class="orbit-dot od2"><i class="fas fa-lock"></i></div>
-          <div class="orbit-dot od3"><i class="fas fa-microchip"></i></div>
-          <div class="orbit-dot od4"><i class="fas fa-bug"></i></div>
+    <!-- LOADING SCREEN -->
+    <div id="loader" class="loader">
+      <div class="loader-inner">
+        <div class="loader-hex">
+          <svg viewBox="0 0 100 100">
+            <polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" />
+          </svg>
+          <i class="fas fa-shield-halved"></i>
         </div>
-      </div>
-      <div class="about-text">
-        <div class="mv-card">
-          <div class="mvc-icon"><i class="fas fa-bullseye"></i></div>
-          <div>
-            <h3>Mission</h3>
-            <p>Foster cybersecurity education and IoT security research among CSE students — building a community of ethical hackers and security specialists.</p>
+        <div class="loader-text">
+          <span class="loader-title">CRYPTO-NET</span>
+          <div class="loader-bar">
+            <div class="loader-fill" id="loaderFill"></div>
           </div>
+          <span class="loader-status" id="loaderStatus">Initializing...</span>
         </div>
-        <div class="mv-card">
-          <div class="mvc-icon"><i class="fas fa-eye"></i></div>
-          <div>
-            <h3>Vision</h3>
-            <p>Become a premier cybersecurity club producing industry-ready professionals capable of securing tomorrow's hyper-connected world.</p>
+      </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-inner">
+        <a href="#home" class="nav-logo">
+          <img src="logo.jpeg" alt="Crypto-Net Logo" class="nav-logo-img" />
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nl" data-text="HOME">HOME</a></li>
+          <li><a href="#about" class="nl" data-text="ABOUT">ABOUT</a></li>
+          <li><a href="#events" class="nl" data-text="EVENTS">EVENTS</a></li>
+          <li>
+            <a href="#projects" class="nl" data-text="PROJECTS">PROJECTS</a>
+          </li>
+          <li><a href="#achievements" class="nl" data-text="WINS">WINS</a></li>
+          <li>
+            <a href="#contact" class="nl join-btn" data-text="JOIN">JOIN</a>
+          </li>
+        </ul>
+        <button class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <canvas id="networkCanvas"></canvas>
+      <div class="hero-grid-overlay"></div>
+
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>INAUGURATION — MARCH 31, 2026
+        </div>
+        <h1 class="hero-title">
+          <span class="title-line glitch-wrap">
+            <span class="glitch" data-text="CRYPTO">CRYPTO</span>
+          </span>
+          <span class="title-line glitch-wrap">
+            <span class="glitch accent-text" data-text="NET">NET</span>
+          </span>
+        </h1>
+        <p class="hero-sub">CSE IoT &amp; Cybersecurity Department Club</p>
+        <div class="typing-wrap">
+          <span class="prompt">$&gt;&nbsp;</span>
+          <span id="typeTarget"></span>
+          <span class="caret">█</span>
+        </div>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-primary"
+            ><i class="fas fa-user-plus"></i>&nbsp;Join the Club</a
+          >
+          <a href="#about" class="btn-ghost"
+            >Explore &nbsp;<i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num" data-target="20">0</span
+            ><span class="stat-lbl">Founders</span>
           </div>
-        </div>
-        <div class="skill-tags">
-          <span>Ethical Hacking</span><span>IoT Security</span><span>Cryptography</span>
-          <span>CTF</span><span>Network Security</span><span>Reverse Engineering</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- CORE TEAM -->
-    <div class="team-section">
-      <h3 class="sub-heading">// Core Team</h3>
-      <div class="team-grid">
-        <div class="team-card">
-          <div class="tc-glow"></div>
-          <div class="tc-avatar"><i class="fas fa-user-shield"></i></div>
-          <div class="tc-info">
-            <span class="tc-role president">President</span>
-            <h4>Your Name Here</h4>
-            <p>Cybersecurity enthusiast &amp; network security expert.</p>
+          <div class="stat-div"></div>
+          <div class="stat">
+            <span class="stat-num" data-target="3">0</span
+            ><span class="stat-lbl">Domains</span>
           </div>
-          <div class="tc-hex"></div>
-        </div>
-        <div class="team-card featured">
-          <div class="tc-glow"></div>
-          <div class="tc-avatar"><i class="fas fa-microchip"></i></div>
-          <div class="tc-info">
-            <span class="tc-role tech-lead">Technical Lead</span>
-            <h4>Your Name Here</h4>
-            <p>IoT security specialist &amp; cryptography researcher.</p>
-          </div>
-          <div class="tc-hex"></div>
-        </div>
-        <div class="team-card">
-          <div class="tc-glow"></div>
-          <div class="tc-avatar"><i class="fas fa-user-tie"></i></div>
-          <div class="tc-info">
-            <span class="tc-role faculty">Faculty Coordinator</span>
-            <h4>Prof. Name Here</h4>
-            <p>15+ years in cybersecurity &amp; IoT research.</p>
-          </div>
-          <div class="tc-hex"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TIMELINE -->
-    <div class="timeline-section">
-      <h3 class="sub-heading">// Club Journey</h3>
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-node"><i class="fas fa-flag"></i></div>
-          <div class="tl-content">
-            <span class="tl-date">March 2026</span>
-            <h4>Inauguration Day</h4>
-            <p>Crypto-Net officially launches in the CSE Department with founding members ready to hack the future.</p>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-node"><i class="fas fa-laptop-code"></i></div>
-          <div class="tl-content">
-            <span class="tl-date">April 2026</span>
-            <h4>First Workshop</h4>
-            <p>Ethical hacking and penetration testing workshop — open to all CSE students.</p>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-node"><i class="fas fa-handshake"></i></div>
-          <div class="tl-content">
-            <span class="tl-date">Mid 2026</span>
-            <h4>Industry Partnerships</h4>
-            <p>Collaborations with cybersecurity companies for guest lectures and internships.</p>
-          </div>
-        </div>
-        <div class="tl-item future">
-          <div class="tl-node"><i class="fas fa-trophy"></i></div>
-          <div class="tl-content">
-            <span class="tl-date">2026 →</span>
-            <h4>National CTF Competitions</h4>
-            <p>Targeting national-level competitions and 100+ active members by year end.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EVENTS -->
-<section id="events" class="section events-section">
-  <div class="hex-bg"></div>
-  <div class="container">
-    <div class="section-header">
-      <span class="sh-tag">// WHAT'S HAPPENING</span>
-      <h2 class="sh-title">Events &amp; <span class="accent">Activities</span></h2>
-    </div>
-
-    <div class="events-grid">
-      <div class="event-card ec1">
-        <div class="ec-date"><span>31</span>MAR</div>
-        <div class="ec-body">
-          <div class="ec-type"><i class="fas fa-rocket"></i> Inauguration</div>
-          <h3>Grand Inauguration</h3>
-          <p>Official launch of Crypto-Net. Join us as we kickstart the club with founding member introductions, demo sessions, and a keynote on cybersecurity trends.</p>
-          <div class="ec-tags"><span>Flagship</span><span>All Welcome</span></div>
-        </div>
-        <div class="ec-glow"></div>
-      </div>
-      <div class="event-card ec2">
-        <div class="ec-date"><span>APR</span>2026</div>
-        <div class="ec-body">
-          <div class="ec-type"><i class="fas fa-laptop-code"></i> Workshop</div>
-          <h3>Ethical Hacking 101</h3>
-          <p>Introduction to penetration testing, tools like Kali Linux, Metasploit, and Burp Suite. Perfect for beginners.</p>
-          <div class="ec-tags"><span>Workshop</span><span>Beginner</span></div>
-        </div>
-        <div class="ec-glow"></div>
-      </div>
-      <div class="event-card ec3">
-        <div class="ec-date"><span>MAY</span>2026</div>
-        <div class="ec-body">
-          <div class="ec-type"><i class="fas fa-wifi"></i> IoT</div>
-          <h3>IoT Security Challenge</h3>
-          <p>Hands-on session: identify and exploit vulnerabilities in real IoT device setups. MQTT, CoAP, and firmware reversing.</p>
-          <div class="ec-tags"><span>Hands-on</span><span>Intermediate</span></div>
-        </div>
-        <div class="ec-glow"></div>
-      </div>
-      <div class="event-card ec4">
-        <div class="ec-date"><span>JUN</span>2026</div>
-        <div class="ec-body">
-          <div class="ec-type"><i class="fas fa-flag"></i> Competition</div>
-          <h3>Capture The Flag</h3>
-          <p>Internal CTF with challenges across web exploitation, reverse engineering, forensics, crypto, and OSINT.</p>
-          <div class="ec-tags"><span>CTF</span><span>All Levels</span></div>
-        </div>
-        <div class="ec-glow"></div>
-      </div>
-    </div>
-
-    <div class="categories-strip">
-      <div class="cat-item"><i class="fas fa-terminal"></i><span>Red Teaming</span></div>
-      <div class="cat-item"><i class="fas fa-network-wired"></i><span>Network Sec</span></div>
-      <div class="cat-item"><i class="fas fa-fingerprint"></i><span>OSINT</span></div>
-      <div class="cat-item"><i class="fas fa-code"></i><span>Web Hacking</span></div>
-      <div class="cat-item"><i class="fas fa-memory"></i><span>Forensics</span></div>
-      <div class="cat-item"><i class="fas fa-key"></i><span>Cryptography</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" class="section projects-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="sh-tag">// WHAT WE BUILD</span>
-      <h2 class="sh-title">Project <span class="accent">Domains</span></h2>
-    </div>
-    <div class="projects-grid">
-      <div class="proj-card">
-        <div class="proj-icon"><i class="fas fa-microchip"></i></div>
-        <h3>IoT Threat Monitor</h3>
-        <p>Real-time dashboard to detect anomalies in IoT device traffic using ML-based threat detection.</p>
-        <div class="proj-stack"><span>Python</span><span>MQTT</span><span>React</span></div>
-        <div class="proj-status coming">In Planning</div>
-      </div>
-      <div class="proj-card featured">
-        <div class="proj-icon"><i class="fas fa-shield-halved"></i></div>
-        <h3>SecureAuth Framework</h3>
-        <p>Lightweight zero-trust authentication system designed for resource-constrained IoT devices.</p>
-        <div class="proj-stack"><span>C++</span><span>TLS 1.3</span><span>ARM</span></div>
-        <div class="proj-status coming">In Planning</div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-icon"><i class="fas fa-flag"></i></div>
-        <h3>CTF Platform</h3>
-        <p>Self-hosted Capture The Flag platform with IoT and cybersecurity themed challenge categories.</p>
-        <div class="proj-stack"><span>CTFd</span><span>Docker</span><span>Linux</span></div>
-        <div class="proj-status coming">In Planning</div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-icon"><i class="fas fa-search"></i></div>
-        <h3>Network Recon Tool</h3>
-        <p>Automated network reconnaissance and vulnerability scanning toolkit built for educational use.</p>
-        <div class="proj-stack"><span>Python</span><span>Nmap</span><span>Shodan API</span></div>
-        <div class="proj-status coming">In Planning</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ACHIEVEMENTS -->
-<section id="achievements" class="section achievements-section">
-  <div class="hex-bg"></div>
-  <div class="container">
-    <div class="section-header">
-      <span class="sh-tag">// OUR GOALS</span>
-      <h2 class="sh-title">Targets &amp; <span class="accent">Milestones</span></h2>
-    </div>
-    <div class="ach-grid">
-      <div class="ach-card">
-        <div class="ach-icon"><i class="fas fa-trophy"></i></div>
-        <h3>National CTF Rankings</h3>
-        <p>Qualify and compete in top national cybersecurity CTF competitions by Q3 2026.</p>
-        <div class="ach-progress"><div class="ap-bar" style="--w:10%"></div><span>Goal Set</span></div>
-      </div>
-      <div class="ach-card">
-        <div class="ach-icon"><i class="fas fa-users"></i></div>
-        <h3>100+ Active Members</h3>
-        <p>Grow to 100 active members across all branches of CSE by December 2026.</p>
-        <div class="ach-progress"><div class="ap-bar" style="--w:25%"></div><span>25 Founders</span></div>
-      </div>
-      <div class="ach-card">
-        <div class="ach-icon"><i class="fas fa-certificate"></i></div>
-        <h3>Certified Members</h3>
-        <p>Support 10+ members in earning CEH, CompTIA Security+, or similar certifications.</p>
-        <div class="ach-progress"><div class="ap-bar" style="--w:5%"></div><span>Starting Up</span></div>
-      </div>
-      <div class="ach-card">
-        <div class="ach-icon"><i class="fas fa-handshake"></i></div>
-        <h3>Industry Tie-ups</h3>
-        <p>Establish partnerships with 3+ cybersecurity companies for internships &amp; mentoring.</p>
-        <div class="ach-progress"><div class="ap-bar" style="--w:0%"></div><span>Prospecting</span></div>
-      </div>
-    </div>
-
-    <!-- THREAT MAP LIVE WIDGET -->
-    <div class="threat-widget">
-      <div class="tw-header">
-        <span class="pulse-dot"></span>
-        <span>LIVE THREAT SIMULATION</span>
-        <span class="tw-badge">DEMO</span>
-      </div>
-      <canvas id="threatCanvas"></canvas>
-      <div class="tw-legend">
-        <span><i class="dot red"></i>Attack Detected</span>
-        <span><i class="dot yellow"></i>Scanning</span>
-        <span><i class="dot green"></i>Secured</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- JOIN / CONTACT -->
-<section id="contact" class="section contact-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="sh-tag">// BECOME A MEMBER</span>
-      <h2 class="sh-title">Join <span class="accent">Crypto-Net</span></h2>
-    </div>
-
-    <div class="contact-grid">
-      <div class="benefits-col">
-        <h3>Why Join?</h3>
-        <div class="benefit-list">
-          <div class="bitem"><div class="bi-icon"><i class="fas fa-terminal"></i></div><div><h4>Hands-on Labs</h4><p>Real hacking labs, CTF challenges, and IoT security sandboxes.</p></div></div>
-          <div class="bitem"><div class="bi-icon"><i class="fas fa-network-wired"></i></div><div><h4>Industry Network</h4><p>Connect with cybersecurity professionals and hiring partners.</p></div></div>
-          <div class="bitem"><div class="bi-icon"><i class="fas fa-trophy"></i></div><div><h4>Competitions</h4><p>Represent the college at national and international CTFs.</p></div></div>
-          <div class="bitem"><div class="bi-icon"><i class="fas fa-certificate"></i></div><div><h4>Certifications</h4><p>Guided paths for CEH, CompTIA Security+, eJPT, and more.</p></div></div>
-        </div>
-
-        <div class="contact-details">
-          <h3>Contact Us</h3>
-          <div class="cd-item"><i class="fas fa-envelope"></i><span>crypto-net@university.edu</span></div>
-          <div class="cd-item"><i class="fas fa-location-dot"></i><span>CSE Department, IoT Lab</span></div>
-          <div class="cd-item"><i class="fas fa-clock"></i><span>Every Wednesday, 4:00 PM</span></div>
-          <div class="social-row">
-            <a href="https://discord.gg/WtJP7RQTc" class="soc"><i class="fab fa-discord"></i></a>
-            <a href="https://github.com/Crypto-Net" class="soc"><i class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/company/cryptonet" class="soc"><i class="fab fa-linkedin"></i></a>
-            <a href="https://instagram.com/cryptonet" class="soc"><i class="fab fa-instagram"></i></a>
+          <div class="stat-div"></div>
+          <div class="stat">
+            <span class="stat-num" data-target="2026">0</span
+            ><span class="stat-lbl">Est. Year</span>
           </div>
         </div>
       </div>
 
-      <div class="form-col">
-        <div class="form-card">
-          <div class="fc-header">
-            <i class="fas fa-terminal"></i>
-            <span>membership_request.sh</span>
-            <div class="fc-dots"><span></span><span></span><span></span></div>
+      <div class="scroll-hint"><span></span></div>
+    </section>
+
+    <!-- INAUGURATION COUNTDOWN -->
+    <section class="countdown-section">
+      <div class="count-inner">
+        <div class="count-label">
+          <span class="pulse-dot"></span> INAUGURATION COUNTDOWN
+        </div>
+        <div class="countdown" id="countdown">
+          <div class="time-block">
+            <span id="cd-h">00</span><small>HRS</small>
           </div>
-          <form id="joinForm">
-            <div class="fg">
-              <label>Full Name</label>
-              <input type="text" placeholder="Enter your full name" required>
-            </div>
-            <div class="fg">
-              <label>College Email</label>
-              <input type="email" placeholder="you@university.edu" required>
-            </div>
-            <div class="fg">
-              <label>Student ID / Roll No.</label>
-              <input type="text" placeholder="e.g. 22CS001" required>
-            </div>
-            <div class="fg-row">
-              <div class="fg">
-                <label>Primary Interest</label>
-                <select required>
-                  <option value="">-- Select --</option>
-                  <option>Ethical Hacking</option>
-                  <option>IoT Security</option>
-                  <option>Cryptography</option>
-                  <option>Network Security</option>
-                  <option>Web Security</option>
-                  <option>Forensics</option>
-                </select>
+          <div class="time-sep">:</div>
+          <div class="time-block">
+            <span id="cd-m">00</span><small>MIN</small>
+          </div>
+          <div class="time-sep">:</div>
+          <div class="time-block">
+            <span id="cd-s">00</span><small>SEC</small>
+          </div>
+        </div>
+        <p class="count-sub">March 31, 2026 — 5th Floor SMV Auditorium</p>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section about-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="sh-tag">// WHO WE ARE</span>
+          <h2 class="sh-title">About <span class="accent">Crypto-Net</span></h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-visual">
+            <div class="shield-anim">
+              <div class="shield-ring r1"></div>
+              <div class="shield-ring r2"></div>
+              <div class="shield-ring r3"></div>
+              <div class="shield-core">
+                <i class="fas fa-shield-halved"></i>
               </div>
-              <div class="fg">
-                <label>Experience Level</label>
-                <select required>
-                  <option value="">-- Select --</option>
-                  <option>Beginner</option>
-                  <option>Intermediate</option>
-                  <option>Advanced</option>
-                </select>
+              <div class="orbit-dot od1"><i class="fas fa-wifi"></i></div>
+              <div class="orbit-dot od2"><i class="fas fa-lock"></i></div>
+              <div class="orbit-dot od3"><i class="fas fa-microchip"></i></div>
+              <div class="orbit-dot od4"><i class="fas fa-bug"></i></div>
+            </div>
+          </div>
+          <div class="about-text">
+            <div class="mv-card">
+              <div class="mvc-icon"><i class="fas fa-bullseye"></i></div>
+              <div>
+                <h3>Mission</h3>
+                <p>
+                  Foster cybersecurity education and IoT security research among
+                  CSE students — building a community of ethical hackers and
+                  security specialists.
+                </p>
               </div>
             </div>
-            <div class="fg">
-              <label>Why do you want to join? (optional)</label>
-              <textarea placeholder="Tell us your motivation..."></textarea>
+            <div class="mv-card">
+              <div class="mvc-icon"><i class="fas fa-eye"></i></div>
+              <div>
+                <h3>Vision</h3>
+                <p>
+                  Become a premier cybersecurity club producing industry-ready
+                  professionals capable of securing tomorrow's hyper-connected
+                  world.
+                </p>
+              </div>
             </div>
-            <button type="submit" class="submit-btn">
-              <span>Execute Join Request</span>
-              <i class="fas fa-paper-plane"></i>
-            </button>
-          </form>
+            <div class="skill-tags">
+              <span>Ethical Hacking</span><span>IoT Security</span
+              ><span>Cryptography</span> <span>CTF</span
+              ><span>Network Security</span><span>Reverse Engineering</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CORE TEAM -->
+        <div class="team-section">
+          <h3 class="sub-heading">// Core Team</h3>
+          <div class="team-grid">
+            <div class="team-card">
+              <div class="tc-glow"></div>
+              <div class="tc-avatar"><i class="fas fa-user-shield"></i></div>
+              <div class="tc-info">
+                <span class="tc-role president">President</span>
+                <h4>Naga Tejaswini P</h4>
+                <!-- <p>Cybersecurity enthusiast &amp; network security expert.</p> -->
+              </div>
+              <div class="tc-hex"></div>
+            </div>
+            <div class="team-card featured">
+              <div class="tc-glow"></div>
+              <div class="tc-avatar"><i class="fas fa-microchip"></i></div>
+              <div class="tc-info">
+                <span class="tc-role tech-lead">Technical Lead</span>
+                <h4>K V Naresh Karthigeyan</h4>
+                <!-- <p>IoT security specialist &amp; cryptography researcher.</p> -->
+              </div>
+              <div class="tc-hex"></div>
+            </div>
+            <div class="team-card">
+              <div class="tc-glow"></div>
+              <div class="tc-avatar"><i class="fas fa-user-tie"></i></div>
+              <div class="tc-info">
+                <span class="tc-role faculty">Faculty Coordinator</span>
+                <h4>Prof. Nidhi Sinha</h4>
+                <!-- <p>15+ years in cybersecurity &amp; IoT research.</p> -->
+              </div>
+              <div class="tc-hex"></div>
+            </div>
+          </div>
+          <!-- SUB TEAMS -->
+          <div class="subteam-section">
+            <h3 class="sub-heading">// Sub Teams</h3>
+
+            <div class="subteam-grid">
+              <!-- IoT Team -->
+              <div class="subteam-card">
+                <div class="st-glow"></div>
+                <div class="st-icon"><i class="fas fa-microchip"></i></div>
+                <h4>IoT Team</h4>
+                <p class="team-lead">Lead: <span>Likith M</span></p>
+                <ul class="member-list">
+                  <li>Kamlesh S</li>
+                  <li>Koushik Reddy</li>
+                  <li>Heamanth</li>
+                  <li>Ramya Shree R</li>
+                </ul>
+              </div>
+
+              <!-- Cybersecurity Team -->
+              <div class="subteam-card">
+                <div class="st-glow"></div>
+                <div class="st-icon"><i class="fas fa-shield-halved"></i></div>
+                <h4>Cyber Security Team</h4>
+                <p class="team-lead">Lead: <span>Keerthi Vasan P</span></p>
+                <ul class="member-list">
+                  <li>Chandra Mourya</li>
+                  <li>Darshan Gowda C</li>
+                  <li>Sanjay Kumar T C</li>
+                  <li>Prekshith</li>
+                  <li>Anisha</li>
+                </ul>
+              </div>
+
+              <!-- Social Media Team -->
+              <div class="subteam-card">
+                <div class="st-glow"></div>
+                <div class="st-icon"><i class="fas fa-bullhorn"></i></div>
+                <h4>Social Media & Outreach</h4>
+                <p class="team-lead">Lead: <span>Meghana </span></p>
+                <ul class="member-list">
+                  <li>Swathi</li>
+                  <li>Abitha</li>
+                </ul>
+              </div>
+
+              <!-- Design Team -->
+              <div class="subteam-card">
+                <div class="st-glow"></div>
+                <div class="st-icon"><i class="fas fa-pen-nib"></i></div>
+                <h4>Design Team</h4>
+                <p class="team-lead">Lead: <span>J Shivashankari</span></p>
+                <ul class="member-list">
+                  <li>Manmitha</li>
+                  <li>Nandita</li>
+                  <li>Rohan</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TIMELINE -->
+        <div class="timeline-section">
+          <h3 class="sub-heading">// Club Journey</h3>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-node"><i class="fas fa-flag"></i></div>
+              <div class="tl-content">
+                <span class="tl-date">March 2026</span>
+                <h4>Inauguration Day</h4>
+                <p>
+                  Crypto-Net officially launches in the CSE Department with
+                  founding members ready to hack the future.
+                </p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-node"><i class="fas fa-laptop-code"></i></div>
+              <div class="tl-content">
+                <span class="tl-date">April 2026</span>
+                <h4>Yantraverse</h4>
+                <p>
+                  Idea & Prototyping Hackathon — our flagship event where
+                  students innovate and compete in IoT and cybersecurity
+                  challenges.
+                </p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-node"><i class="fas fa-laptop-code"></i></div>
+              <div class="tl-content">
+                <span class="tl-date">May 2026</span>
+                <h4>Dhakai Singh's Networking Masterclass</h4>
+                <p>
+                  An in-depth masterclass on networking fundamentals, protocols,
+                  and real-world security implications — by industry expert
+                  Dhakai Singh.
+                </p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-node"><i class="fas fa-handshake"></i></div>
+              <div class="tl-content">
+                <span class="tl-date">Mid 2026</span>
+                <h4>Cryptonet Vibathon</h4>
+                <p>
+                  The Vibathon — our signature speed-hacking event. Solve
+                  cybersecurity challenges under time pressure. Prizes for top
+                  performers.
+                </p>
+              </div>
+            </div>
+            <div class="tl-item future">
+              <div class="tl-node"><i class="fas fa-trophy"></i></div>
+              <div class="tl-content">
+                <span class="tl-date">2026 →</span>
+                <h4>National CTF Competitions</h4>
+                <p>
+                  Targeting national-level competitions and 100+ active members
+                  by year end.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-logo">
-      <div class="logo-hex sm"><i class="fas fa-shield-halved"></i></div>
-      <span>CRYPTO<span class="accent">-NET</span></span>
-    </div>
-    <p class="footer-tag">Securing Tomorrow's Connected World</p>
-    <div class="footer-nav">
-      <a href="#home">Home</a><a href="#about">About</a>
-      <a href="#events">Events</a><a href="#projects">Projects</a>
-      <a href="#contact">Join</a>
-    </div>
-    <p class="footer-copy">© 2026 Crypto-Net Club · CSE Department · All rights reserved.</p>
-  </div>
-</footer>
+    <!-- EVENTS -->
+    <section id="events" class="section events-section">
+      <div class="hex-bg"></div>
+      <div class="container">
+        <div class="section-header">
+          <span class="sh-tag">// CRYPTO-NET PRESENTS</span>
+          <h2 class="sh-title">Upcoming <span class="accent">Events</span></h2>
+        </div>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+        <!-- YANTRAVERSE FEATURED BANNER -->
+        <div class="yantraverse-banner">
+          <div class="yb-left">
+            <div class="yb-tag">
+              <i class="fas fa-star"></i>&nbsp;FLAGSHIP EVENT
+            </div>
+            <h2 class="yb-title">YANTRA<span>VERSE</span></h2>
+            <p class="yb-sub">Idea &amp; Prototyping Hackathon</p>
+            <p class="yb-desc">
+              Build. Innovate. Secure. Crypto-Net's premier hackathon where
+              ideas meet execution — bring your best IoT and cybersecurity
+              concepts to life.
+            </p>
+            <div class="yb-actions">
+              <a href="yantraverse.html" target="_blank" class="yb-btn primary">
+                <i class="fas fa-external-link-alt"></i>&nbsp;View Event Poster
+              </a>
+              <a href="coming-soon.html" class="yb-btn ghost">
+                <i class="fas fa-user-plus"></i>&nbsp;Register Interest
+              </a>
+            </div>
+          </div>
+          <div class="yb-right">
+            <div class="yb-circuit">
+              <div class="yb-hex-ring r1"></div>
+              <div class="yb-hex-ring r2"></div>
+              <div class="yb-icon"><i class="fas fa-microchip"></i></div>
+              <div class="yb-orbit yo1"><i class="fas fa-code"></i></div>
+              <div class="yb-orbit yo2">
+                <i class="fas fa-shield-halved"></i>
+              </div>
+              <div class="yb-orbit yo3"><i class="fas fa-wifi"></i></div>
+            </div>
+          </div>
+        </div>
 
-<script src="script.js"></script>
-</body>
+        <!-- UPCOMING EVENTS GRID -->
+        <h3 class="sub-heading" style="margin-top: 56px">
+          // Scheduled Events
+        </h3>
+        <div class="events-grid">
+          <div class="event-card ec1">
+            <div class="ec-date"><span>31</span>MAR</div>
+            <div class="ec-body">
+              <div class="ec-type">
+                <i class="fas fa-rocket"></i> Inauguration
+              </div>
+              <h3>Grand Inauguration</h3>
+              <p>
+                Official launch of Crypto-Net — founding member introductions,
+                live demos, and a cybersecurity keynote. Be part of history.
+              </p>
+              <div class="ec-tags">
+                <span>Flagship</span><span>All Welcome</span>
+              </div>
+            </div>
+            <div class="ec-glow"></div>
+          </div>
+
+          <div class="event-card ec2 yantraverse-card">
+            <div class="ec-date"><span>TBA</span>APR</div>
+            <div class="ec-body">
+              <div class="ec-type">
+                <i class="fas fa-microchip"></i> Hackathon
+              </div>
+              <h3>YANTRAVERSE</h3>
+              <p>
+                Idea &amp; Prototyping Hackathon — innovate, prototype, and
+                compete. IoT &amp; cybersecurity themed challenges await.
+              </p>
+              <div class="ec-tags">
+                <span>Hackathon</span><span>All Levels</span>
+              </div>
+              <a href="yantraverse.html" target="_blank" class="ec-poster-btn">
+                <i class="fas fa-arrow-up-right-from-square"></i> View Poster
+              </a>
+            </div>
+            <div class="ec-glow"></div>
+          </div>
+
+          <div class="event-card ec3">
+            <div class="ec-date"><span>28</span>APR</div>
+            <div class="ec-body">
+              <div class="ec-type">
+                <i class="fas fa-network-wired"></i> Masterclass
+              </div>
+              <h3>Dhakai Singh's Networking Masterclass</h3>
+              <p>
+                An in-depth masterclass on networking fundamentals, protocols,
+                and real-world security implications — by industry expert Dhakai
+                Singh.
+              </p>
+              <div class="ec-tags">
+                <span>Masterclass</span><span>April 28, 2026</span>
+              </div>
+            </div>
+            <div class="ec-glow"></div>
+          </div>
+
+          <div class="event-card ec4">
+            <div class="ec-date"><span>TBA</span></div>
+            <div class="ec-body">
+              <div class="ec-type"><i class="fas fa-trophy"></i> Hackathon</div>
+              <h3>Cryptonet Vibathon</h3>
+              <p>
+                The Vibathon — our signature speed-hacking event. Solve
+                cybersecurity challenges under time pressure. Prizes for top
+                performers.
+              </p>
+              <div class="ec-tags">
+                <span>Vibathon</span><span>May 18, 2026</span>
+              </div>
+            </div>
+            <div class="ec-glow"></div>
+          </div>
+        </div>
+
+        <div class="categories-strip">
+          <div class="cat-item">
+            <i class="fas fa-terminal"></i><span>Red Teaming</span>
+          </div>
+          <div class="cat-item">
+            <i class="fas fa-network-wired"></i><span>Network Sec</span>
+          </div>
+          <div class="cat-item">
+            <i class="fas fa-fingerprint"></i><span>OSINT</span>
+          </div>
+          <div class="cat-item">
+            <i class="fas fa-code"></i><span>Web Hacking</span>
+          </div>
+          <div class="cat-item">
+            <i class="fas fa-memory"></i><span>Forensics</span>
+          </div>
+          <div class="cat-item">
+            <i class="fas fa-key"></i><span>Cryptography</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section projects-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="sh-tag">// WHAT WE BUILD</span>
+          <h2 class="sh-title">Project <span class="accent">Domains</span></h2>
+        </div>
+        <div class="projects-grid">
+          <div class="proj-card">
+            <div class="proj-icon"><i class="fas fa-microchip"></i></div>
+            <h3>IoT Threat Monitor</h3>
+            <p>
+              Real-time dashboard to detect anomalies in IoT device traffic
+              using ML-based threat detection.
+            </p>
+            <div class="proj-stack">
+              <span>Python</span><span>MQTT</span><span>React</span>
+            </div>
+            <div class="proj-status coming">In Planning</div>
+          </div>
+          <div class="proj-card featured">
+            <div class="proj-icon"><i class="fas fa-shield-halved"></i></div>
+            <h3>SecureAuth Framework</h3>
+            <p>
+              Lightweight zero-trust authentication system designed for
+              resource-constrained IoT devices.
+            </p>
+            <div class="proj-stack">
+              <span>C++</span><span>TLS 1.3</span><span>ARM</span>
+            </div>
+            <div class="proj-status coming">In Planning</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-icon"><i class="fas fa-flag"></i></div>
+            <h3>CTF Platform</h3>
+            <p>
+              Self-hosted Capture The Flag platform with IoT and cybersecurity
+              themed challenge categories.
+            </p>
+            <div class="proj-stack">
+              <span>CTFd</span><span>Docker</span><span>Linux</span>
+            </div>
+            <div class="proj-status coming">In Planning</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-icon"><i class="fas fa-search"></i></div>
+            <h3>Network Recon Tool</h3>
+            <p>
+              Automated network reconnaissance and vulnerability scanning
+              toolkit built for educational use.
+            </p>
+            <div class="proj-stack">
+              <span>Python</span><span>Nmap</span><span>Shodan API</span>
+            </div>
+            <div class="proj-status coming">In Planning</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="section achievements-section">
+      <div class="hex-bg"></div>
+      <div class="container">
+        <div class="section-header">
+          <span class="sh-tag">// OUR GOALS</span>
+          <h2 class="sh-title">
+            Targets &amp; <span class="accent">Milestones</span>
+          </h2>
+        </div>
+        <div class="ach-grid">
+          <div class="ach-card">
+            <div class="ach-icon"><i class="fas fa-trophy"></i></div>
+            <h3>National CTF Rankings</h3>
+            <p>
+              Qualify and compete in top national cybersecurity CTF competitions
+              by Q3 2026.
+            </p>
+            <div class="ach-progress">
+              <div class="ap-bar" style="--w: 1%"></div>
+              <span>Goal Set</span>
+            </div>
+          </div>
+          <div class="ach-card">
+            <div class="ach-icon"><i class="fas fa-users"></i></div>
+            <h3>100+ Active Members</h3>
+            <p>
+              Grow to 100 active members across all branches by December 2026.
+            </p>
+            <div class="ach-progress">
+              <div class="ap-bar" style="--w: 25%"></div>
+              <span>20 Founders</span>
+            </div>
+          </div>
+          <div class="ach-card">
+            <div class="ach-icon"><i class="fas fa-certificate"></i></div>
+            <h3>Certified Members</h3>
+            <p>
+              Support members in earning CEH, CompTIA Security+, or similar
+              certifications.
+            </p>
+            <div class="ach-progress">
+              <div class="ap-bar" style="--w: 5%"></div>
+              <span>Starting Up</span>
+            </div>
+          </div>
+          <div class="ach-card">
+            <div class="ach-icon"><i class="fas fa-handshake"></i></div>
+            <h3>Industry Tie-ups</h3>
+            <p>
+              Establish partnerships with 3+ cybersecurity companies for
+              internships &amp; mentoring.
+            </p>
+            <div class="ach-progress">
+              <div class="ap-bar" style="--w: 0%"></div>
+              <span>Prospecting</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- THREAT MAP LIVE WIDGET -->
+        <div class="threat-widget">
+          <div class="tw-header">
+            <span class="pulse-dot"></span>
+            <span>LIVE THREAT SIMULATION</span>
+            <span class="tw-badge">DEMO</span>
+          </div>
+          <canvas id="threatCanvas"></canvas>
+          <div class="tw-legend">
+            <span><i class="dot red"></i>Attack Detected</span>
+            <span><i class="dot yellow"></i>Scanning</span>
+            <span><i class="dot green"></i>Secured</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOIN / CONTACT -->
+    <section id="contact" class="section contact-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="sh-tag">// BECOME A MEMBER</span>
+          <h2 class="sh-title">Join <span class="accent">Crypto-Net</span></h2>
+        </div>
+
+        <div class="contact-grid">
+          <div class="benefits-col">
+            <h3>Why Join?</h3>
+            <div class="benefit-list">
+              <div class="bitem">
+                <div class="bi-icon"><i class="fas fa-terminal"></i></div>
+                <div>
+                  <h4>Hands-on Labs</h4>
+                  <p>
+                    Real hacking labs, CTF challenges, and IoT security
+                    sandboxes.
+                  </p>
+                </div>
+              </div>
+              <div class="bitem">
+                <div class="bi-icon"><i class="fas fa-network-wired"></i></div>
+                <div>
+                  <h4>Industry Network</h4>
+                  <p>
+                    Connect with cybersecurity professionals and hiring
+                    partners.
+                  </p>
+                </div>
+              </div>
+              <div class="bitem">
+                <div class="bi-icon"><i class="fas fa-trophy"></i></div>
+                <div>
+                  <h4>Competitions</h4>
+                  <p>
+                    Represent the college at national and international CTFs.
+                  </p>
+                </div>
+              </div>
+              <div class="bitem">
+                <div class="bi-icon"><i class="fas fa-certificate"></i></div>
+                <div>
+                  <h4>Certifications</h4>
+                  <p>
+                    Guided paths for CEH, CompTIA Security+, eJPT, and more.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-details">
+              <h3>Contact Us</h3>
+              <div class="cd-item">
+                <i class="fas fa-envelope"></i
+                ><span>
+                  <a
+                    href="mailto:cryptonet@cambridge.edu.in"
+                    class="email-link"
+                  >
+                    cryptonet@cambridge.edu.in
+                  </a>
+                </span>
+              </div>
+              <div class="cd-item">
+                <i class="fas fa-location-dot"></i
+                ><span>CSE(IOT & CS) Department</span>
+              </div>
+              <div class="cd-item">
+                <i class="fas fa-clock"></i
+                ><span>Every Wednesday, 12:30 PM</span>
+              </div>
+              <div class="social-row">
+                <a href="https://discord.gg/WtJP7RQTc" class="soc" target="_blank"
+                  ><i class="fab fa-discord"></i
+                ></a>
+                <a href="https://github.com/crypto-net-cit" class="soc" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="coming-soon.html" class="soc" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="coming-soon.html" class="soc" target="_blank"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-col">
+            <div class="form-card">
+              <div class="fc-header">
+                <i class="fas fa-terminal"></i>
+                <span>membership_request.sh</span>
+                <div class="fc-dots">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+              <form id="joinForm">
+                <div class="fg">
+                  <label>Full Name</label>
+                  <input
+                    type="text"
+                    placeholder="Enter your full name"
+                    required
+                  />
+                </div>
+                <div class="fg">
+                  <label>College Email</label>
+                  <input
+                    type="email"
+                    placeholder="you@university.edu"
+                    required
+                  />
+                </div>
+                <div class="fg">
+                  <label>Student ID / Roll No.</label>
+                  <input type="text" placeholder="e.g. 22CS001" required />
+                </div>
+                <div class="fg-row">
+                  <div class="fg">
+                    <label>Primary Interest</label>
+                    <select required>
+                      <option value="">-- Select --</option>
+                      <option>Ethical Hacking</option>
+                      <option>IoT Security</option>
+                      <option>Cryptography</option>
+                      <option>Network Security</option>
+                      <option>Web Security</option>
+                      <option>Forensics</option>
+                    </select>
+                  </div>
+                  <div class="fg">
+                    <label>Experience Level</label>
+                    <select required>
+                      <option value="">-- Select --</option>
+                      <option>Beginner</option>
+                      <option>Intermediate</option>
+                      <option>Advanced</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="fg">
+                  <label>Why do you want to join? (optional)</label>
+                  <textarea placeholder="Tell us your motivation..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                  <span>Execute Join Request</span>
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <img src="logo.jpeg" alt="Crypto-Net" class="footer-logo-img" />
+        </div>
+        <p class="footer-tag">Securing Tomorrow's Connected World</p>
+        <div class="footer-nav">
+          <a href="#home">Home</a><a href="#about">About</a>
+          <a href="#events">Events</a><a href="#projects">Projects</a>
+          <a href="#contact">Join</a>
+        </div>
+        <p class="footer-copy">
+          © 2026 Crypto-Net Club · CSE(IOT & CS) Department · All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+  </body>
 </html>
