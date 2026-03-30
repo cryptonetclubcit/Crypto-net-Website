@@ -140,13 +140,6 @@ body:hover .cursor-outer { border-color: var(--green); }
   font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
   letter-spacing: 0.1em;
 }
-.logo-hex {
-  width: 40px; height: 40px; background: linear-gradient(135deg, var(--green), var(--cyan));
-  clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--black); font-size: 1.1rem; font-weight: 900;
-}
-.logo-hex.sm { width: 30px; height: 30px; font-size: 0.8rem; }
 .nav-logo .accent { color: var(--cyan); }
 
 .nav-links {
@@ -870,44 +863,301 @@ form { padding: 28px; display: flex; flex-direction: column; gap: 18px; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ===========================
+   LOGO STYLES
+   =========================== */
+.nav-logo-img {
+  height: 44px; width: auto;
+  object-fit: contain;
+  border-radius: 6px;
+  display: block;
+}
+.hero-logo-img-wrap {
+  margin-bottom: 20px;
+  animation: fadeUp 0.8s ease 0.3s both;
+}
+.hero-logo-img {
+  height: clamp(80px, 18vw, 160px);
+  width: auto; object-fit: contain;
+  border-radius: 12px;
+  filter: drop-shadow(0 0 30px rgba(0,229,255,0.35));
+}
+.footer-logo-img {
+  height: 48px; width: auto;
+  object-fit: contain; border-radius: 6px;
+  margin-bottom: 12px; display: block; margin-left: auto; margin-right: auto;
+}
+
+/* ===========================
+   YANTRAVERSE BANNER
+   =========================== */
+.yantraverse-banner {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 40px; align-items: center;
+  background: linear-gradient(135deg, rgba(16,24,38,0.95), rgba(10,12,28,0.95));
+  border: 1px solid rgba(179,71,255,0.35);
+  border-radius: 20px; padding: 48px;
+  position: relative; overflow: hidden; margin-bottom: 24px;
+}
+.yantraverse-banner::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(179,71,255,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.yantraverse-banner::after {
+  content: 'YANTRAVERSE'; position: absolute;
+  right: -20px; top: 50%; transform: translateY(-50%) rotate(90deg);
+  font-family: var(--font-display); font-size: 5rem; font-weight: 900;
+  color: rgba(179,71,255,0.04); letter-spacing: 0.1em;
+  pointer-events: none; white-space: nowrap;
+}
+.yb-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.2em;
+  color: #b347ff; border: 1px solid rgba(179,71,255,0.4);
+  padding: 5px 14px; border-radius: 20px;
+  background: rgba(179,71,255,0.08); margin-bottom: 16px;
+}
+.yb-title {
+  font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900; color: var(--white); line-height: 1; margin-bottom: 6px;
+}
+.yb-title span { color: #b347ff; }
+.yb-sub {
+  font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.15em;
+  color: var(--muted); margin-bottom: 16px;
+}
+.yb-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-bottom: 28px; max-width: 480px; }
+.yb-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.yb-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px; border-radius: 8px; font-weight: 700;
+  font-family: var(--font-body); font-size: 0.88rem;
+  text-decoration: none; transition: all 0.3s; cursor: pointer;
+}
+.yb-btn.primary {
+  background: linear-gradient(135deg, #b347ff, #6a1fd4);
+  color: var(--white); box-shadow: 0 0 20px rgba(179,71,255,0.4);
+}
+.yb-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 0 35px rgba(179,71,255,0.6); }
+.yb-btn.ghost {
+  border: 1px solid #b347ff; color: #b347ff;
+  background: rgba(179,71,255,0.06);
+}
+.yb-btn.ghost:hover { background: rgba(179,71,255,0.15); transform: translateY(-2px); }
+
+/* Yantraverse animated visual */
+.yb-circuit {
+  position: relative; width: 200px; height: 200px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.yb-hex-ring {
+  position: absolute; border-radius: 50%; border: 1px solid;
+  animation: ring-spin linear infinite;
+}
+.yb-hex-ring.r1 { width: 100%; height: 100%; border-color: rgba(179,71,255,0.2); animation-duration: 18s; }
+.yb-hex-ring.r2 { width: 70%; height: 70%; border-color: rgba(179,71,255,0.35); animation-duration: 12s; animation-direction: reverse; }
+.yb-icon {
+  width: 80px; height: 80px; z-index: 2;
+  background: linear-gradient(135deg, #b347ff, #6a1fd4);
+  clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 2rem;
+  box-shadow: 0 0 30px rgba(179,71,255,0.5);
+  animation: core-pulse 3s ease-in-out infinite;
+}
+.yb-orbit {
+  position: absolute; width: 32px; height: 32px;
+  background: rgba(179,71,255,0.1); border: 1px solid rgba(179,71,255,0.3);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  color: #b347ff; font-size: 0.75rem;
+}
+.yo1 { top: 6%; left: 50%; transform: translateX(-50%); }
+.yo2 { bottom: 6%; right: 8%; }
+.yo3 { bottom: 6%; left: 8%; }
+
+/* Yantraverse card poster button */
+.ec-poster-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 12px; font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.1em; color: #b347ff;
+  border: 1px solid rgba(179,71,255,0.35); border-radius: 6px;
+  padding: 6px 14px; text-decoration: none; transition: all 0.3s;
+  background: rgba(179,71,255,0.06);
+}
+.ec-poster-btn:hover { background: rgba(179,71,255,0.18); transform: translateY(-1px); }
+
+/* ===========================
    RESPONSIVE
    =========================== */
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
+  .yantraverse-banner { grid-template-columns: 1fr; gap: 32px; padding: 36px; }
+  .yantraverse-banner::after { display: none; }
+  .yb-circuit { margin: 0 auto; }
   .about-grid { grid-template-columns: 1fr; }
   .shield-anim { width: 260px; height: 260px; }
   .team-grid { grid-template-columns: repeat(2,1fr); }
   .contact-grid { grid-template-columns: 1fr; }
 }
 
+@media (max-width: 900px) {
+  /* Events: stack to single column */
+  .events-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .ach-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+
+  /* Event cards: stack date above content */
+  .event-card { flex-direction: column; }
+  .ec-date {
+    flex-direction: row; justify-content: flex-start;
+    align-items: center; gap: 10px;
+    min-width: unset; padding: 14px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .ec-date span { font-size: 1.4rem; }
+
+  /* Timeline: reduce left padding */
+  .timeline { padding-left: 28px; }
+  .timeline::before { left: 6px; }
+  .tl-node { left: -28px; width: 28px; height: 28px; font-size: 0.65rem; }
+}
+
 @media (max-width: 768px) {
-  .navbar { padding: 0 20px; }
+  /* Navbar mobile */
+  .navbar { padding: 0 16px; height: 64px; }
   .nav-links {
-    position: fixed; top: 70px; left: 0; right: 0;
+    position: fixed; top: 64px; left: 0; right: 0;
     flex-direction: column; background: rgba(2,4,8,0.98);
-    padding: 24px; gap: 4px; border-bottom: 1px solid var(--border);
+    padding: 20px 16px; gap: 2px;
+    border-bottom: 1px solid var(--border);
     transform: translateY(-120%); transition: transform 0.4s ease;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px); z-index: 999;
   }
   .nav-links.open { transform: translateY(0); }
   .hamburger { display: flex; }
-  .nl { padding: 12px 16px; }
+  .nl { padding: 12px 16px; width: 100%; text-align: left; }
 
-  .events-grid, .projects-grid, .ach-grid { grid-template-columns: 1fr; }
-  .team-grid { grid-template-columns: 1fr; }
+  /* Sections */
+  .section { padding: 60px 16px; }
+  .container { padding: 0 4px; }
+
+  /* Hero */
+  .hero-content { padding: 80px 16px 40px; }
+  .hero-logo-img { height: clamp(60px, 30vw, 110px); }
+  .hero-badge { font-size: 0.62rem; padding: 5px 12px; }
+  .typing-wrap { font-size: 0.85rem; }
+  .hero-stats { flex-wrap: wrap; gap: 16px; justify-content: center; }
+  .stat-num { font-size: 1.4rem; }
+  .stat-div { display: none; }
+
+  /* Countdown */
+  .countdown-section { padding: 24px 16px; }
+  .countdown { gap: 6px; }
+  .time-block span { font-size: 2rem; }
+  .time-sep { font-size: 1.5rem; }
+
+  /* About */
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .mv-card { flex-direction: column; gap: 12px; }
+  .mission-vision { grid-template-columns: 1fr; }
+
+  /* Shield animation — smaller on mobile */
+  .shield-anim { width: 200px; height: 200px; }
+  .shield-core { width: 80px; height: 80px; font-size: 2rem; }
+
+  /* Team */
+  .team-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+
+  /* Timeline */
+  .timeline { padding-left: 24px; }
+  .tl-node { left: -24px; width: 24px; height: 24px; font-size: 0.6rem; }
+  .tl-content { padding: 16px; margin-left: 4px; }
+
+  /* Yantraverse banner */
+  .yantraverse-banner { padding: 24px 20px; gap: 28px; border-radius: 14px; }
+  .yb-title { font-size: 2rem; }
+  .yb-circuit { width: 140px; height: 140px; }
+  .yb-icon { width: 56px; height: 56px; font-size: 1.4rem; }
+  .yb-actions { flex-direction: column; align-items: flex-start; }
+  .yb-btn { width: 100%; justify-content: center; }
+
+  /* Events grid */
+  .events-grid { grid-template-columns: 1fr; gap: 16px; }
+  .event-card { flex-direction: column; }
+  .ec-date {
+    flex-direction: row; gap: 10px; align-items: center;
+    min-width: unset; padding: 12px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-right: none;
+  }
+  .ec-date span { font-size: 1.3rem; }
+  .ec-body { padding: 18px; }
+
+  /* Categories strip */
+  .categories-strip { gap: 10px; }
+  .cat-item { padding: 10px 14px; font-size: 0.72rem; }
+
+  /* Projects, achievements */
+  .projects-grid { grid-template-columns: 1fr; gap: 16px; }
+  .ach-grid { grid-template-columns: 1fr; gap: 16px; }
+
+  /* Contact / form */
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
   .fg-row { grid-template-columns: 1fr; }
+  .benefit-list { gap: 12px; }
 
-  .hero-title { font-size: clamp(3rem, 18vw, 5rem); }
-  .hero-stats { gap: 16px; }
-  .stat-num { font-size: 1.5rem; }
-  .stat-div { height: 30px; }
+  /* Threat widget */
+  #threatCanvas { height: 180px; }
+  .tw-counters { flex-direction: column; gap: 4px; align-items: flex-start; }
 
-  .countdown { gap: 8px; }
-  .time-block span { font-size: 2.2rem; }
+  /* Form card */
+  .form-card form { padding: 20px 16px; }
 
-  .section { padding: 70px 20px; }
+  /* Footer */
+  .footer { padding: 32px 16px; }
+  .footer-nav { gap: 14px; }
 }
 
 @media (max-width: 480px) {
-  .hero-ctas { flex-direction: column; align-items: center; }
-  .btn-primary, .btn-ghost { width: 100%; max-width: 280px; justify-content: center; }
+  /* Hero */
+  .hero-ctas { flex-direction: column; align-items: center; width: 100%; }
+  .btn-primary, .btn-ghost { width: 100%; max-width: 100%; justify-content: center; }
+  .hero-logo-img { height: 56px; }
+  .hero-badge { font-size: 0.58rem; letter-spacing: 0.1em; }
+
+  /* Section headers */
+  .sh-title { font-size: 1.6rem; }
+  .section-header { margin-bottom: 40px; }
+  .section { padding: 50px 12px; }
+
+  /* Event cards full bleed */
+  .event-card { border-radius: 12px; }
+  .ec-body h3 { font-size: 0.95rem; }
+  .ec-body p { font-size: 0.8rem; }
+
+  /* Countdown tiny */
+  .time-block span { font-size: 1.7rem; }
+  .time-block small { font-size: 0.55rem; }
+
+  /* Team card */
+  .team-card { padding: 24px 16px; }
+
+  /* Benefits */
+  .bitem { flex-direction: column; gap: 10px; }
+  .bi-icon { align-self: flex-start; }
+
+  /* Contact details */
+  .cd-item { font-size: 0.72rem; }
+
+  /* Yantraverse banner */
+  .yantraverse-banner { padding: 20px 16px; }
+  .yb-desc { font-size: 0.82rem; }
+  .yb-circuit { display: none; }
+
+  /* Threat widget log */
+  .tw-log { height: 70px; font-size: 0.62rem; }
+  .tw-header { font-size: 0.62rem; padding: 10px 12px; }
+  .tw-counters { display: none; }
 }
