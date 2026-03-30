@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YANTRAVERSE – Idea & Prototyping Hackathon</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&family=Share+Tech+Mono&display=swap');
+
+  :root {
+    --cyan: #00f5ff;
+    --purple: #b347ff;
+    --blue: #4169ff;
+    --neon-blue: #00aaff;
+    --dark1: #000510;
+    --dark2: #030820;
+    --dark3: #060d2e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .poster {
+    width: 794px;
+    min-height: 1123px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(175deg, #000510 0%, #030d1f 25%, #050a20 50%, #0a0520 75%, #000510 100%);
+    font-family: 'Exo 2', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── Animated SVG canvas ── */
+  .bg-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  /* ── Radial ambient glow ── */
+  .ambient {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .amb1 { width: 420px; height: 420px; top: 200px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, rgba(0,170,255,0.13) 0%, transparent 70%); }
+  .amb2 { width: 280px; height: 280px; top: 240px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, rgba(179,71,255,0.1) 0%, transparent 70%); }
+  .amb3 { width: 180px; height: 140px; bottom: 80px; left: 50%; transform: translateX(-50%); background: radial-gradient(ellipse, rgba(0,245,255,0.06) 0%, transparent 70%); }
+
+  /* ── HEADER BAND ── */
+  .header-band {
+    width: 100%;
+    padding: 18px 0 10px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+  }
+  .dept-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 3.5px;
+    color: rgba(0,245,255,0.55);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .presents-line {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 300;
+    font-size: 10.5px;
+    letter-spacing: 5px;
+    color: rgba(179,71,255,0.6);
+    text-transform: uppercase;
+  }
+
+  /* ── TITLE ── */
+  .title-block {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    margin-top: 10px;
+  }
+  .title-main {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 62px;
+    letter-spacing: 6px;
+    line-height: 1;
+    background: linear-gradient(135deg, #00f5ff 0%, #4169ff 40%, #b347ff 70%, #00f5ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 18px rgba(0,245,255,0.45)) drop-shadow(0 0 40px rgba(65,105,255,0.3));
+    position: relative;
+  }
+  .title-main::after {
+    content: 'YANTRAVERSE';
+    position: absolute;
+    inset: 0;
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 62px;
+    letter-spacing: 6px;
+    background: linear-gradient(135deg, #00f5ff 0%, #4169ff 40%, #b347ff 70%, #00f5ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: blur(14px);
+    opacity: 0.35;
+  }
+  .subtitle {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    letter-spacing: 9px;
+    color: rgba(200,220,255,0.75);
+    margin-top: 8px;
+    text-transform: uppercase;
+  }
+  .title-divider {
+    width: 260px;
+    height: 1px;
+    margin: 12px auto 0;
+    background: linear-gradient(90deg, transparent, rgba(0,245,255,0.5), rgba(179,71,255,0.5), transparent);
+  }
+
+  /* ── CENTRAL ENERGY CORE ── */
+  .core-section {
+    position: relative;
+    z-index: 10;
+    width: 340px;
+    height: 340px;
+    margin-top: 14px;
+  }
+  .core-svg {
+    width: 100%;
+    height: 100%;
+    animation: coreSpin 18s linear infinite;
+  }
+  @keyframes coreSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .core-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .core-pulse {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,245,255,0.95) 0%, rgba(65,105,255,0.6) 40%, rgba(179,71,255,0.2) 70%, transparent 100%);
+    box-shadow: 0 0 30px 8px rgba(0,245,255,0.4), 0 0 70px 20px rgba(65,105,255,0.25), 0 0 120px 40px rgba(179,71,255,0.1);
+    animation: pulse 2.8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.08); opacity: 0.85; }
+  }
+
+  /* ── INFO SECTION ── */
+  .info-section {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    padding: 0 50px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  /* ── EVENT DETAILS ROW ── */
+  .event-details {
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    max-width: 620px;
+  }
+  .detail-item {
+    flex: 1;
+    text-align: center;
+    padding: 12px 10px;
+    border: 1px solid rgba(0,245,255,0.12);
+    position: relative;
+    background: rgba(0,10,30,0.5);
+    backdrop-filter: blur(4px);
+  }
+  .detail-item:not(:last-child) {
+    border-right: none;
+  }
+  .detail-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,245,255,0.03), transparent);
+    pointer-events: none;
+  }
+  .detail-icon {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(0,245,255,0.45);
+    font-family: 'Share Tech Mono', monospace;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    display: block;
+  }
+  .detail-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(200,230,255,0.92);
+    letter-spacing: 1px;
+  }
+  .detail-sub {
+    font-size: 9px;
+    color: rgba(150,180,220,0.55);
+    letter-spacing: 1.5px;
+    margin-top: 3px;
+    font-family: 'Exo 2', sans-serif;
+  }
+
+  /* ── VENUE BOX ── */
+  .venue-box {
+    width: 100%;
+    max-width: 620px;
+    border: 1px solid rgba(179,71,255,0.2);
+    background: rgba(5,0,20,0.5);
+    padding: 12px 20px;
+    text-align: center;
+    position: relative;
+    backdrop-filter: blur(4px);
+  }
+  .venue-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 60%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(179,71,255,0.6), transparent);
+  }
+  .venue-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 4px;
+    color: rgba(179,71,255,0.55);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .venue-text {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 12.5px;
+    font-weight: 400;
+    color: rgba(200,215,255,0.85);
+    letter-spacing: 1px;
+  }
+
+  /* ── COMING SOON ── */
+  .coming-soon-section {
+    width: 100%;
+    max-width: 620px;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .coming-soon-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #00f5ff 0%, #4169ff 50%, #b347ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 14px rgba(0,245,255,0.5));
+    animation: flicker 3.5s ease-in-out infinite;
+  }
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    48% { opacity: 1; }
+    50% { opacity: 0.75; }
+    52% { opacity: 1; }
+    94% { opacity: 1; }
+    96% { opacity: 0.6; }
+    98% { opacity: 1; }
+  }
+  .coming-soon-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 5px;
+    color: rgba(179,71,255,0.55);
+    text-transform: uppercase;
+  }
+  .coming-soon-dots {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .cs-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(0,245,255,0.5);
+    animation: dotPulse 1.4s ease-in-out infinite;
+  }
+  .cs-dot:nth-child(2) { animation-delay: 0.2s; background: rgba(65,105,255,0.5); }
+  .cs-dot:nth-child(3) { animation-delay: 0.4s; background: rgba(179,71,255,0.5); }
+  @keyframes dotPulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.5); opacity: 1; }
+  }
+
+  /* ── OPEN TO ALL BADGE ── */
+  .open-badge {
+    margin-top: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(0,245,255,0.2);
+    background: rgba(0,245,255,0.04);
+    padding: 7px 20px;
+    position: relative;
+  }
+  .open-badge::before, .open-badge::after {
+    content: '◆';
+    color: rgba(0,245,255,0.35);
+    font-size: 8px;
+  }
+  .open-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(0,245,255,0.7);
+    text-transform: uppercase;
+  }
+
+  /* ── BOTTOM SECTION ── */
+  .bottom-section {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    padding: 0 50px;
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    width: 500px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(65,105,255,0.3), rgba(0,245,255,0.4), rgba(179,71,255,0.3), transparent);
+  }
+
+  /* ── ORGANIZER ── */
+  .organizer-block {
+    text-align: center;
+  }
+  .org-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 4px;
+    color: rgba(179,71,255,0.45);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .org-name {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: rgba(200,215,255,0.8);
+  }
+
+  /* ── QR + FOOTER ROW ── */
+  .footer-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 22px;
+    justify-content: center;
+  }
+  .qr-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .qr-box {
+    width: 70px;
+    height: 70px;
+    border: 1px solid rgba(0,245,255,0.25);
+    background: rgba(0,10,30,0.6);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-box::before, .qr-box::after {
+    content: '';
+    position: absolute;
+    width: 10px; height: 10px;
+  }
+  .qr-box::before { top: -1px; left: -1px; border-top: 2px solid rgba(0,245,255,0.6); border-left: 2px solid rgba(0,245,255,0.6); }
+  .qr-box::after { bottom: -1px; right: -1px; border-bottom: 2px solid rgba(0,245,255,0.6); border-right: 2px solid rgba(0,245,255,0.6); }
+  .qr-inner {
+    width: 50px;
+    height: 50px;
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: repeat(7,1fr);
+    gap: 1px;
+    opacity: 0.5;
+  }
+  .qr-cell {
+    background: rgba(0,245,255,0.7);
+    border-radius: 0.5px;
+  }
+  .qr-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 7.5px;
+    letter-spacing: 2px;
+    color: rgba(0,245,255,0.35);
+    text-transform: uppercase;
+  }
+  .footer-divider-v {
+    width: 1px;
+    height: 70px;
+    background: linear-gradient(to bottom, transparent, rgba(0,245,255,0.2), transparent);
+  }
+  .hashtag-block {
+    text-align: left;
+  }
+  .hashtag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(0,245,255,0.5);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .cit-tag {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(179,71,255,0.4);
+    text-transform: uppercase;
+  }
+
+  /* ── BOTTOM EDGE ── */
+  .bottom-edge {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(0,245,255,0.5), rgba(65,105,255,0.7), rgba(179,71,255,0.5), transparent);
+  }
+  .top-edge {
+    position: absolute;
+    top: 0;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0,245,255,0.3), transparent);
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top-edge"></div>
+  <div class="bottom-edge"></div>
+
+  <!-- Ambient glows -->
+  <div class="ambient amb1"></div>
+  <div class="ambient amb2"></div>
+  <div class="ambient amb3"></div>
+
+  <!-- Background SVG: Grid + Neural net + Particles -->
+  <svg class="bg-svg" viewBox="0 0 794 1123" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="coreGlow" cx="50%" cy="37%" r="35%">
+        <stop offset="0%" stop-color="#00f5ff" stop-opacity="0.07"/>
+        <stop offset="60%" stop-color="#4169ff" stop-opacity="0.04"/>
+        <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="2" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="softGlow">
+        <feGaussianBlur stdDeviation="1.2" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- Core radial glow -->
+    <circle cx="397" cy="420" r="280" fill="url(#coreGlow)"/>
+
+    <!-- Perspective grid lines - horizontal -->
+    <g stroke="rgba(65,105,255,0.07)" stroke-width="0.5">
+      <line x1="0" y1="200" x2="794" y2="200"/>
+      <line x1="0" y1="300" x2="794" y2="300"/>
+      <line x1="0" y1="400" x2="794" y2="400"/>
+      <line x1="0" y1="500" x2="794" y2="500"/>
+      <line x1="0" y1="600" x2="794" y2="600"/>
+      <line x1="0" y1="700" x2="794" y2="700"/>
+      <line x1="0" y1="800" x2="794" y2="800"/>
+      <line x1="0" y1="900" x2="794" y2="900"/>
+      <line x1="0" y1="1000" x2="794" y2="1000"/>
+    </g>
+    <!-- Perspective grid lines - vertical -->
+    <g stroke="rgba(65,105,255,0.055)" stroke-width="0.5">
+      <line x1="100" y1="0" x2="100" y2="1123"/>
+      <line x1="200" y1="0" x2="200" y2="1123"/>
+      <line x1="300" y1="0" x2="300" y2="1123"/>
+      <line x1="397" y1="0" x2="397" y2="1123"/>
+      <line x1="494" y1="0" x2="494" y2="1123"/>
+      <line x1="594" y1="0" x2="594" y2="1123"/>
+      <line x1="694" y1="0" x2="694" y2="1123"/>
+    </g>
+
+    <!-- Diagonal grid accents -->
+    <g stroke="rgba(0,245,255,0.04)" stroke-width="0.4">
+      <line x1="0" y1="0" x2="794" y2="794"/>
+      <line x1="794" y1="0" x2="0" y2="794"/>
+      <line x1="0" y1="200" x2="600" y2="1123"/>
+      <line x1="794" y1="200" x2="194" y2="1123"/>
+    </g>
+
+    <!-- Neural network background - nodes and connections (scattered) -->
+    <!-- Node cluster: left -->
+    <g opacity="0.4" filter="url(#softGlow)">
+      <circle cx="80" cy="350" r="2.5" fill="#00f5ff" opacity="0.5"/>
+      <circle cx="140" cy="280" r="2" fill="#4169ff" opacity="0.45"/>
+      <circle cx="60" cy="450" r="1.8" fill="#b347ff" opacity="0.4"/>
+      <circle cx="170" cy="420" r="2.2" fill="#00f5ff" opacity="0.45"/>
+      <circle cx="110" cy="520" r="1.5" fill="#4169ff" opacity="0.35"/>
+      <circle cx="50" cy="580" r="2" fill="#00f5ff" opacity="0.3"/>
+      <circle cx="190" cy="550" r="1.8" fill="#b347ff" opacity="0.35"/>
+      <line x1="80" y1="350" x2="140" y2="280" stroke="#4169ff" stroke-width="0.5" opacity="0.3"/>
+      <line x1="80" y1="350" x2="60" y2="450" stroke="#00f5ff" stroke-width="0.5" opacity="0.25"/>
+      <line x1="140" y1="280" x2="170" y2="420" stroke="#b347ff" stroke-width="0.5" opacity="0.25"/>
+      <line x1="60" y1="450" x2="170" y2="420" stroke="#4169ff" stroke-width="0.5" opacity="0.2"/>
+      <line x1="170" y1="420" x2="110" y2="520" stroke="#00f5ff" stroke-width="0.5" opacity="0.2"/>
+      <line x1="60" y1="450" x2="110" y2="520" stroke="#b347ff" stroke-width="0.4" opacity="0.2"/>
+      <line x1="110" y1="520" x2="50" y2="580" stroke="#4169ff" stroke-width="0.5" opacity="0.2"/>
+      <line x1="110" y1="520" x2="190" y2="550" stroke="#00f5ff" stroke-width="0.4" opacity="0.2"/>
+    </g>
+    <!-- Node cluster: right -->
+    <g opacity="0.4" filter="url(#softGlow)">
+      <circle cx="714" cy="350" r="2.5" fill="#b347ff" opacity="0.5"/>
+      <circle cx="654" cy="280" r="2" fill="#4169ff" opacity="0.45"/>
+      <circle cx="734" cy="450" r="1.8" fill="#00f5ff" opacity="0.4"/>
+      <circle cx="624" cy="420" r="2.2" fill="#b347ff" opacity="0.45"/>
+      <circle cx="684" cy="520" r="1.5" fill="#4169ff" opacity="0.35"/>
+      <circle cx="744" cy="580" r="2" fill="#b347ff" opacity="0.3"/>
+      <circle cx="604" cy="550" r="1.8" fill="#00f5ff" opacity="0.35"/>
+      <line x1="714" y1="350" x2="654" y2="280" stroke="#4169ff" stroke-width="0.5" opacity="0.3"/>
+      <line x1="714" y1="350" x2="734" y2="450" stroke="#b347ff" stroke-width="0.5" opacity="0.25"/>
+      <line x1="654" y1="280" x2="624" y2="420" stroke="#00f5ff" stroke-width="0.5" opacity="0.25"/>
+      <line x1="734" y1="450" x2="624" y2="420" stroke="#4169ff" stroke-width="0.5" opacity="0.2"/>
+      <line x1="624" y1="420" x2="684" y2="520" stroke="#b347ff" stroke-width="0.5" opacity="0.2"/>
+      <line x1="734" y1="450" x2="684" y2="520" stroke="#00f5ff" stroke-width="0.4" opacity="0.2"/>
+      <line x1="684" y1="520" x2="744" y2="580" stroke="#4169ff" stroke-width="0.5" opacity="0.2"/>
+      <line x1="684" y1="520" x2="604" y2="550" stroke="#b347ff" stroke-width="0.4" opacity="0.2"/>
+    </g>
+
+    <!-- Hexagon patterns: left top -->
+    <g stroke="rgba(0,245,255,0.1)" stroke-width="0.6" fill="none">
+      <polygon points="35,80 55,69 75,80 75,102 55,113 35,102" />
+      <polygon points="75,80 95,69 115,80 115,102 95,113 75,102" />
+      <polygon points="55,113 75,102 95,113 95,135 75,146 55,135" />
+    </g>
+    <!-- Hexagon patterns: right top -->
+    <g stroke="rgba(179,71,255,0.1)" stroke-width="0.6" fill="none">
+      <polygon points="719,80 739,69 759,80 759,102 739,113 719,102" />
+      <polygon points="679,80 699,69 719,80 719,102 699,113 679,102" />
+      <polygon points="699,113 719,102 739,113 739,135 719,146 699,135" />
+    </g>
+
+    <!-- Gear/circuit hybrid: left mid -->
+    <g transform="translate(50,680)" stroke="rgba(0,245,255,0.12)" stroke-width="0.7" fill="none">
+      <circle cx="30" cy="30" r="22"/>
+      <circle cx="30" cy="30" r="14"/>
+      <circle cx="30" cy="30" r="5"/>
+      <!-- Gear teeth as rectangles -->
+      <rect x="26" y="2" width="8" height="8"/>
+      <rect x="26" y="50" width="8" height="8"/>
+      <rect x="2" y="26" width="8" height="8"/>
+      <rect x="50" y="26" width="8" height="8"/>
+      <!-- Circuit lines -->
+      <line x1="30" y1="0" x2="30" y2="-15"/>
+      <line x1="30" y1="-15" x2="55" y2="-15"/>
+      <line x1="60" y1="30" x2="75" y2="30"/>
+      <line x1="75" y1="30" x2="75" y2="10"/>
+      <circle cx="75" cy="10" r="2" fill="rgba(0,245,255,0.4)"/>
+      <line x1="30" y1="60" x2="30" y2="75"/>
+      <line x1="30" y1="75" x2="5" y2="75"/>
+      <circle cx="5" cy="75" r="2" fill="rgba(0,245,255,0.4)"/>
+    </g>
+
+    <!-- Gear/circuit hybrid: right mid -->
+    <g transform="translate(694,680)" stroke="rgba(179,71,255,0.12)" stroke-width="0.7" fill="none">
+      <circle cx="30" cy="30" r="22"/>
+      <circle cx="30" cy="30" r="14"/>
+      <circle cx="30" cy="30" r="5"/>
+      <rect x="26" y="2" width="8" height="8"/>
+      <rect x="26" y="50" width="8" height="8"/>
+      <rect x="2" y="26" width="8" height="8"/>
+      <rect x="50" y="26" width="8" height="8"/>
+      <line x1="30" y1="0" x2="30" y2="-15"/>
+      <line x1="30" y1="-15" x2="5" y2="-15"/>
+      <line x1="0" y1="30" x2="-15" y2="30"/>
+      <line x1="-15" y1="30" x2="-15" y2="10"/>
+      <circle cx="-15" cy="10" r="2" fill="rgba(179,71,255,0.4)"/>
+      <line x1="30" y1="60" x2="30" y2="75"/>
+      <line x1="30" y1="75" x2="55" y2="75"/>
+      <circle cx="55" cy="75" r="2" fill="rgba(179,71,255,0.4)"/>
+    </g>
+
+    <!-- Waveform accent: bottom left -->
+    <g opacity="0.25">
+      <polyline points="30,980 55,960 70,1000 90,940 110,1005 130,955 150,990 170,965 190,980" stroke="#4169ff" stroke-width="0.8" fill="none"/>
+    </g>
+    <!-- Waveform accent: bottom right -->
+    <g opacity="0.25">
+      <polyline points="604,980 629,960 644,1000 664,940 684,1005 704,955 724,990 744,965 764,980" stroke="#b347ff" stroke-width="0.8" fill="none"/>
+    </g>
+
+    <!-- Scattered small particles -->
+    <g fill="rgba(0,245,255,0.35)" filter="url(#softGlow)">
+      <circle cx="200" cy="150" r="1.2"/>
+      <circle cx="580" cy="130" r="1.5"/>
+      <circle cx="650" cy="950" r="1.2"/>
+      <circle cx="130" cy="900" r="1"/>
+      <circle cx="350" cy="1050" r="1.3"/>
+      <circle cx="450" cy="1060" r="1"/>
+      <circle cx="260" cy="750" r="1.2"/>
+      <circle cx="530" cy="760" r="1.2"/>
+      <circle cx="720" cy="820" r="1"/>
+      <circle cx="74" cy="780" r="1.2"/>
+    </g>
+    <g fill="rgba(179,71,255,0.35)" filter="url(#softGlow)">
+      <circle cx="320" cy="120" r="1.2"/>
+      <circle cx="460" cy="140" r="1"/>
+      <circle cx="700" cy="700" r="1.2"/>
+      <circle cx="90" cy="660" r="1"/>
+      <circle cx="400" cy="1080" r="1.2"/>
+      <circle cx="160" cy="1000" r="1"/>
+    </g>
+  </svg>
+
+  <!-- ── HEADER ── -->
+  <div class="header-band">
+    <div class="dept-label">Cambridge Institute of Technology · Bengaluru</div>
+    <div class="presents-line">presents</div>
+  </div>
+
+  <!-- ── TITLE ── -->
+  <div class="title-block">
+    <div class="title-main">YANTRAVERSE</div>
+    <div class="subtitle">Idea &amp; Prototyping</div>
+    <div class="title-divider"></div>
+  </div>
+
+  <!-- ── CENTRAL ENERGY CORE ── -->
+  <div class="core-section">
+    <svg class="core-svg" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="orbitGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#00f5ff" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#4169ff" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="lineGlow">
+          <feGaussianBlur stdDeviation="1.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Outer orbit ring -->
+      <ellipse cx="170" cy="170" rx="155" ry="155" stroke="rgba(0,245,255,0.12)" stroke-width="1" fill="none"/>
+      <!-- Tilted orbit ring 1 -->
+      <ellipse cx="170" cy="170" rx="150" ry="50" stroke="rgba(0,245,255,0.2)" stroke-width="0.8" fill="none" filter="url(#lineGlow)"/>
+      <!-- Tilted orbit ring 2 -->
+      <ellipse cx="170" cy="170" rx="50" ry="150" stroke="rgba(179,71,255,0.18)" stroke-width="0.8" fill="none" filter="url(#lineGlow)"/>
+      <!-- Tilted orbit ring 3 -->
+      <ellipse cx="170" cy="170" rx="140" ry="70" stroke="rgba(65,105,255,0.15)" stroke-width="0.7" fill="none" transform="rotate(45,170,170)"/>
+      <!-- Tilted orbit ring 4 -->
+      <ellipse cx="170" cy="170" rx="140" ry="70" stroke="rgba(65,105,255,0.12)" stroke-width="0.7" fill="none" transform="rotate(-45,170,170)"/>
+
+      <!-- Hexagonal frame -->
+      <polygon points="170,20 297,95 297,245 170,320 43,245 43,95" stroke="rgba(0,245,255,0.08)" stroke-width="0.7" fill="none"/>
+      <polygon points="170,50 270,107 270,233 170,290 70,233 70,107" stroke="rgba(179,71,255,0.07)" stroke-width="0.6" fill="none"/>
+
+      <!-- Node dots on orbit -->
+      <circle cx="320" cy="170" r="3" fill="rgba(0,245,255,0.7)" filter="url(#lineGlow)"/>
+      <circle cx="20" cy="170" r="3" fill="rgba(0,245,255,0.7)" filter="url(#lineGlow)"/>
+      <circle cx="170" cy="20" r="2.5" fill="rgba(179,71,255,0.65)" filter="url(#lineGlow)"/>
+      <circle cx="170" cy="320" r="2.5" fill="rgba(179,71,255,0.65)" filter="url(#lineGlow)"/>
+      <circle cx="297" cy="95" r="2" fill="rgba(65,105,255,0.6)"/>
+      <circle cx="43" cy="95" r="2" fill="rgba(65,105,255,0.6)"/>
+      <circle cx="297" cy="245" r="2" fill="rgba(65,105,255,0.6)"/>
+      <circle cx="43" cy="245" r="2" fill="rgba(65,105,255,0.6)"/>
+
+      <!-- Neural net spokes from center -->
+      <g stroke="rgba(0,245,255,0.12)" stroke-width="0.5" stroke-dasharray="4,6">
+        <line x1="170" y1="170" x2="320" y2="170"/>
+        <line x1="170" y1="170" x2="20" y2="170"/>
+        <line x1="170" y1="170" x2="170" y2="20"/>
+        <line x1="170" y1="170" x2="170" y2="320"/>
+        <line x1="170" y1="170" x2="297" y2="95"/>
+        <line x1="170" y1="170" x2="43" y2="95"/>
+        <line x1="170" y1="170" x2="297" y2="245"/>
+        <line x1="170" y1="170" x2="43" y2="245"/>
+      </g>
+
+      <!-- Rotating arc accent -->
+      <g transform="rotate(0,170,170)">
+        <path d="M 170 35 A 135 135 0 0 1 305 170" stroke="rgba(0,245,255,0.35)" stroke-width="1.5" fill="none" stroke-linecap="round" filter="url(#lineGlow)"/>
+        <path d="M 170 305 A 135 135 0 0 1 35 170" stroke="rgba(179,71,255,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round" filter="url(#lineGlow)"/>
+      </g>
+
+      <!-- Inner digital grid -->
+      <rect x="145" y="145" width="50" height="50" stroke="rgba(0,245,255,0.15)" stroke-width="0.5" fill="rgba(0,10,30,0.3)"/>
+      <line x1="145" y1="162" x2="195" y2="162" stroke="rgba(0,245,255,0.1)" stroke-width="0.4"/>
+      <line x1="145" y1="178" x2="195" y2="178" stroke="rgba(0,245,255,0.1)" stroke-width="0.4"/>
+      <line x1="162" y1="145" x2="162" y2="195" stroke="rgba(0,245,255,0.1)" stroke-width="0.4"/>
+      <line x1="178" y1="145" x2="178" y2="195" stroke="rgba(0,245,255,0.1)" stroke-width="0.4"/>
+
+      <!-- Centre glow overlay -->
+      <circle cx="170" cy="170" r="75" fill="url(#orbitGlow)"/>
+    </svg>
+    <div class="core-inner">
+      <div class="core-pulse"></div>
+    </div>
+  </div>
+
+  <!-- ── INFO ── -->
+  <div class="info-section">
+    <div class="event-details">
+      <div class="detail-item" style="flex:3; border-right:1px solid rgba(0,245,255,0.12);">
+        <span class="detail-icon">◈ date &amp; time</span>
+        <div class="detail-value" style="font-size:15px; letter-spacing:4px;">COMING SOON</div>
+        <div class="detail-sub">STAY TUNED</div>
+      </div>
+    </div>
+
+    <div class="venue-box">
+      <div class="venue-label">◈ venue</div>
+      <div class="venue-text" style="letter-spacing:3px; color:rgba(179,71,255,0.6);">TO BE ANNOUNCED</div>
+    </div>
+
+    <!-- Coming Soon -->
+    <div class="coming-soon-section">
+      <div class="coming-soon-title">COMING SOON</div>
+      <div class="coming-soon-sub">◈ &nbsp; details will be revealed shortly &nbsp; ◈</div>
+      <div class="coming-soon-dots">
+        <div class="cs-dot"></div>
+        <div class="cs-dot"></div>
+        <div class="cs-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BOTTOM ── -->
+  <div class="bottom-section">
+    <div class="section-divider"></div>
+
+    <div class="organizer-block">
+      <div class="org-label">◈ organised by</div>
+      <div class="org-name">Department of Computer Science &amp; Engineering (IoT)</div>
+    </div>
+
+    <div class="footer-row">
+      <div class="hashtag-block" style="text-align:center;">
+        <span class="hashtag">#YANTRAVERSE2026</span>
+        <span class="hashtag">#IoTHackathon</span>
+        <div class="cit-tag">Cambridge Institute of Technology</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
