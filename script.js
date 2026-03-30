@@ -37,7 +37,7 @@
 //
 //  STEP 4 — Paste your URL below:
 
-const SHEETS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+const SHEETS_URL = process.env.sheets_url;
 // e.g. 'https://script.google.com/macros/s/AKfycbxXXXXXXXXXX/exec'
 
 // ─── LOADER ──────────────────────────────────────────────────────────────────
