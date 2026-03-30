@@ -37,7 +37,7 @@
 //
 //  STEP 4 — Paste your URL below:
 
-const SHEETS_URL = process.env.sheets_url;
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx8vCGbZMpzx06wDVemsT30ODxTCCU2W24XrmY7SfNqzg3_9tp8lsKE6-ddfTE5LQjnTw/exec';
 // e.g. 'https://script.google.com/macros/s/AKfycbxXXXXXXXXXX/exec'
 
 // ─── LOADER ──────────────────────────────────────────────────────────────────
@@ -232,10 +232,14 @@ function animateCounter(el) {
 // ─── DETAILED THREAT SIMULATION ───────────────────────────────────────────────
 (function initThreat() {
   const canvas = document.getElementById('threatCanvas');
-  const ctx    = canvas.getContext('2d');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  const header = document.querySelector('.tw-header');
+  if (!header) return;
 
   // ── Inject richer header with live counters
-  document.querySelector('.tw-header').innerHTML = `
+  header.innerHTML = `
     <span class="pulse-dot"></span>
     <span style="letter-spacing:.12em">LIVE NETWORK THREAT MAP</span>
     <span class="tw-badge">SIMULATION</span>
