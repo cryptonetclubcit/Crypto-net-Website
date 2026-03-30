@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!loader || !loaderFill || !loaderStatus) return;
 
         if (step >= loadSteps.length) {
-            setTimeout(() => loader.classList.add("hide"), 500);
+            setTimeout(() => loader.classList.add("hide"), 900);
             return;
         }
 
@@ -31,13 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
         loaderFill.style.width = pct + "%";
         loaderStatus.textContent = msg;
         step++;
-        setTimeout(advanceLoader, step === loadSteps.length ? 600 : 380);
+        setTimeout(advanceLoader, step === loadSteps.length ? 1200 : 850);
     }
     advanceLoader();
 
     window.addEventListener("load", () => {
         if (loader) {
-            setTimeout(() => loader.classList.add("hide"), 800);
+            setTimeout(() => loader.classList.add("hide"), 1800);
         }
     });
 
